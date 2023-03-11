@@ -10,6 +10,7 @@
 	--secondary-font-family: "Raleway", sans-serif;
 	--main-gap: 24px;
 	--customers-icons: #8e8f99;
+	--transition-func: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 h1,
@@ -103,7 +104,8 @@ button {
 	align-items: center;
 }
 
-.page-header {}
+.page-header {
+}
 
 .header-nav {
 	display: flex;
@@ -129,6 +131,21 @@ button {
 	color: var(--main-color-dark);
 }
 
+.menu-link.active {
+	color: var(--hover-active-color);
+}
+
+.menu-link.active::after {
+	content: "";
+	width: 100%;
+	height: 4px;
+	background: var(--hover-active-color);
+	border-radius: 2px;
+	position: absolute;
+	bottom: -24px;
+	left: 0;
+}
+
 .menu {
 	display: flex;
 	align-items: center;
@@ -138,10 +155,15 @@ button {
 	margin-right: 40px;
 }
 
+.menu-item {
+	position: relative;
+}
+
 .menu-link {
 	font-weight: 500;
 	color: var(--main-color-dark);
 	padding: 24px 0;
+	transition: color var(--transition-func);
 }
 
 .menu-link:hover,
@@ -165,17 +187,17 @@ button {
 .contact-email {
 	font-style: normal;
 	color: var(--secondary-color-text);
+	transition: color var(--transition-func);
 }
 
 .contact-phone-number {
 	font-style: normal;
 	color: var(--secondary-color-text);
+	transition: color var(--transition-func);
 }
 
-.contact-email:hover,
-.contact-phone-number:focus,
-.contact-email:focus,
-.contact-phone-number:hover {
+.contact-email:is(:hover, :focus),
+.contact-phone-number:is(:hover, :focus) {
 	color: var(--hover-active-color);
 }
 
@@ -194,10 +216,10 @@ button {
 	background-size: cover;
 	max-width: 1440px;
 	margin: 0 auto;
-
 }
 
-.hero-content {}
+.hero-content {
+}
 
 .hero-title {
 	font-size: 56px;
@@ -226,10 +248,10 @@ button {
 	background-color: var(--primary-brand-color);
 	display: block;
 	margin: 0 auto;
+	transition: color var(--transition-func), background-color var(--transition-func);
 }
 
-.hero-button-text:hover,
-.hero-button-text:focus {
+.hero-button-text:is(:hover, :focus) {
 	color: var(--white-color);
 	background-color: var(--hover-active-color);
 }
@@ -251,7 +273,8 @@ button {
 	overflow: hidden;
 }
 
-.features {}
+.features {
+}
 
 .features-list {
 	display: flex;
@@ -275,9 +298,11 @@ button {
 	margin-bottom: 8px;
 }
 
-.features-icon {}
+.features-icon {
+}
 
-.features-subtitle {}
+.features-subtitle {
+}
 
 .features-description {
 	color: var(--secondary-color-text);
@@ -291,7 +316,8 @@ button {
 	padding-top: 0;
 }
 
-.we-do-title {}
+.we-do-title {
+}
 
 .we-do-list {
 	display: flex;
@@ -303,9 +329,11 @@ button {
 	flex-basis: calc((100% - 48px) / 3);
 }
 
-.we-do-pic {}
+.we-do-pic {
+}
 
-.we-do-image {}
+.we-do-image {
+}
 
 /* --------------- /3rd section - we-do ----------------- */
 
@@ -315,7 +343,8 @@ button {
 	background-color: var(--light-mode-color);
 }
 
-.our-team-title {}
+.our-team-title {
+}
 
 .our-team-list {
 	display: flex;
@@ -330,14 +359,16 @@ button {
 	background: var(--white-color);
 }
 
-.our-team-image {}
+.our-team-image {
+}
 
 .our-team-item-content {
 	padding: 32px 16px;
 	text-align: center;
 }
 
-.our-team-item-name {}
+.our-team-item-name {
+}
 
 .our-team-item-position {
 	color: var(--secondary-color);
@@ -364,6 +395,7 @@ button {
 	border-radius: 50%;
 	background-color: var(--primary-brand-color);
 	color: var(--light-mode-color);
+	transition: color var(--transition-func), background-color var(--transition-func);
 }
 
 .team-social-link:is(:hover, :focus) {
@@ -382,7 +414,8 @@ button {
 	padding-top: 130px;
 }
 
-.customers-title {}
+.customers-title {
+}
 
 .customers-list {
 	display: flex;
@@ -404,6 +437,7 @@ button {
 	color: var(--customers-icons);
 	border: 1px solid var(--customers-icons);
 	border-radius: 4px;
+	transition: color var(--transition-func), background-color var(--transition-func);
 }
 
 .customers-link:is(:hover, :focus) {
@@ -466,6 +500,7 @@ button {
 	border-radius: 50%;
 	background-color: rgba(255, 255, 255, 0.1);
 	color: var(--light-mode-color);
+	transition: color var(--transition-func), background-color var(--transition-func);
 }
 
 .footer-social-list {
@@ -488,7 +523,67 @@ button {
 }
 
 /* ----------------- /footer ------------------ */
+/* ----------------- MODAL WINDOW -------------- */
 
+.backdrop {
+	width: 100%;
+	height: 100%;
+	background: rgba(46, 47, 66, 0.4);
+	position: fixed;
+	top: 0;
+	left: 0;
+	transition: opacity var(--transition-func), visibility var(--transition-func);
+}
+
+.modal {
+	width: 408px;
+	min-height: 576px;
+	background: #fcfcfc;
+	padding: 24px;
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 2px 1px rgba(0, 0, 0, 0.2);
+	border-radius: 4px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(1);
+	transition: transform var(--transition-func);
+}
+
+.modal-close {
+	width: 24px;
+	height: 24px;
+	background: var(--accent-color);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 50%;
+	color: #000000;
+	display: block;
+	margin-left: auto;
+	/* position: absolute;
+	top: 24px;
+	right: 24px; */
+	transition: color var(--transition-func), background-color var(--transition-func);
+}
+
+.modal-close:is(:hover, :focus) {
+	background-color: var(--hover-active-color);
+	color: var(--white-color);
+}
+
+.icon-modal {
+	fill: currentColor;
+}
+
+.is-hidden {
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+.backdrop.is-hidden .modal {
+	transform: translate(-50%, -50%) scale(0);
+}
+
+/* ----------------- /MODAL WINDOW -------------- */
 /* -------------- PORTFOLIO 1st screen ---------------- */
 
 .portfolio-btn {
@@ -504,9 +599,12 @@ button {
 	color: var(--hover-active-color);
 	padding: 12px 24px;
 	box-shadow: none;
+	transition: color var(--transition-func), background var(--transition-func), box-shadow var(--transition-func),
+		border-color var(--transition-func);
 }
 
-.portfolio-button {}
+.portfolio-button {
+}
 
 .portfolio-btn-border {
 	border: 1px solid var(--accent-color);
@@ -537,10 +635,34 @@ button {
 .portfolio-link {
 	color: inherit;
 	display: block;
+	transition: box-shadow var(--transition-func);
 }
 
 .portfolio-link:is(:hover, :focus) {
 	box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08), 0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
+}
+
+.portfolio-link:is(:hover, :focus) .portfolio-text-overlay {
+	transform: translateY(0);
+}
+
+.portfolio-wrap {
+	position: relative;
+	overflow: hidden;
+}
+
+.portfolio-text-overlay {
+	color: var(--light-mode-color);
+	position: absolute;
+	padding: 40px 32px;
+	top: 0;
+	left: 0;
+	background-color: var(--primary-brand-color);
+	width: 100%;
+	height: 100%;
+	transform: translateY(100%);
+	transition: transform var(--transition-func);
+	overflow: auto;
 }
 
 .portfolio-item:nth-last-child(-n + 3) {
@@ -554,7 +676,8 @@ button {
 	background-color: var(--white-color);
 }
 
-.portfolio-subtitle {}
+.portfolio-subtitle {
+}
 
 .portfolio-description {
 	color: var(--secondary-color-text);
